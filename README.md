@@ -1,16 +1,29 @@
 <div align="center">
     <h1>Commita</h1>
     <sub>Why waste time with commiting and pushing, Comita gets you done in seconds.</sub>
+    <br>
+    <br>
+    <img src="https://img.shields.io/badge/Build-In_Development-g?logo=devbox&logoColor=white">    
+    <img src="https://img.shields.io/badge/Open-Source-orange?logo=git&logoColor=white">    
 </div>
 
-## What's Comita?
+## What's Commita?
 
-Comita will be a simple program, which will give you freedom to use easier git commands, that will give you a ready and quick conventional commit message and even give you an emoji!
+Commita will be a simple program, which will give you freedom to use easier git commands, that will give you a ready and quick conventional commit message template and even an emoji along with it.
 
 ## Commands
 
-One of the few commands you'll be able to find here:
+Commands that exists on the program:
 
 ```bash
-git commit
+git feat        - New feature
+git fix         - Bug fix
+git chore       - General changes
+git docs        - Documentation
+git refactor    - Changes that does not affect functionalities
+git remove      - Remove files and directories
 ```
+
+## License
+
+Commita is a open-source software and completely free to use!
