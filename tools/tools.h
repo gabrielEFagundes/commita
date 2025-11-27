@@ -9,7 +9,7 @@
 /// 
 /// Usually, it stages all your files, commits them with your message and then push it to your repo's branch
 /// @param prefix The prefix (feat, fix, etc)
-/// @param argcount Counts the amount of arguments, usually 3 (git <prefix> <message> <repo_url>)
+/// @param argcount Counts the amount of arguments, usually 3 (git <prefix> <message> <branch> <repo_url>)
 /// @param argvec Vector with your command and message
 int exec_command(char *prefix, int argcount, char *argvec[]);
 #endif

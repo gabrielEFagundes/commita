@@ -18,8 +18,13 @@ int exec_command(char *prefix, int argc, char *argv[])
     sprintf(message_buffer, "%s %s", prefix, argv[1]);
 
     snprintf(origin, sizeof origin, 
-            "git remote remove origin && git remote add origin %s && git add -A && git commit -m \"%s\" && git push -u origin main",
-            argv[2], message_buffer);
+            "git remote remove origin && "
+            "git remote add origin %s && "
+            "git add -A && "
+            "git commit -m %s && "
+            "git checkout -b %s || git checkout %s" // I have to rewrite this, or else it won't work on powershell/cmd
+            "git push -u origin main",
+            argv[3], argv[2], message_buffer);
 
     int statusCode = system(origin);
 
