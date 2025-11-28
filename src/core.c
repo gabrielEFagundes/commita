@@ -14,7 +14,7 @@ void exec_help()
         "   chore       :art: chore: <<message>>\n"
         "   docs        :memo: docs: <<message>>\n"
         "   refactor    :recycle: refactor: <<message>>\n"
-        "   remove      :fire: remove: <<message>>\n\n"
+        "   remove      :fire: rm: <<message>>\n\n"
         "The syntax for most commands are:\n\n"
         "git [prefix] <<commit message>> <<branch>> <<repository url>>\n\n"
         "   prefix      the type of commit message you want"
