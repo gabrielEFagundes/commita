@@ -14,7 +14,7 @@ static struct option long_options[] = {
 void show_help()
 {
     sprintf(buffer, 
-        "\nCommita - v0.2.0"
+        "\nCommita - v1.0.0"
         "\nWelcome to Commita!\n\n"
         "All commands starts with 'git'\n\n"
         "   feat        :sparkles: feat: <<message>>\n"
@@ -34,7 +34,7 @@ void show_help()
 }
 
 void show_version(){
-    sprintf(buffer, "\nCommita - v0.2.0\n");
+    sprintf(buffer, "\nCommita - v1.0.0\n");
     printf("%s", buffer);
 }
 
