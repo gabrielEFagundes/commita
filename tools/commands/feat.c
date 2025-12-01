@@ -2,7 +2,7 @@
 #include "../tools.h"
 
 void exec_git_feat(int argc, char *argv[]){
-    exec_command(":sparkles: feat: ", argc, argv);
+    exec_command(":sparkles: feat:", argc, argv);
 }
 
 int main(int argc, char *argv[]){
