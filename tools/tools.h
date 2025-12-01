@@ -25,4 +25,10 @@ void exec_git_refactor(int argcount, char *argvect[]);
 void exec_git_remove(int argcount, char *argvect[]);
 
 /// @brief Shows a message with all commands, in case of help needed
-void exec_help();
+void show_help();
+
+/// @brief Simply shows the version of Commita
+void show_version();
+
+/// @brief Shows when a wrong flag is parsed
+void wrong_opt();
