@@ -1,38 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <ctype.h>
 #include "tools.h"
 
 char buffer[1000];
 
 int exec_command(char *prefix, int argc, char *argv[])
 {
-    if(argc != 4){
-        sprintf(buffer, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> <message> <repo_url> <branch>\n\nType commita for help\n", argc);
-        printf("%s", buffer);
-        exit(EXIT_FAILURE);
-    }
+    // if(argc != 4){
+    //     sprintf(buffer, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> <message> <repo_url> <branch>\n\nType commita for help\n", argc);
+    //     printf("%s", buffer);
+    //     exit(EXIT_FAILURE);
+    // }
     
-    char message_buffer[512];
-    char origin[512];
+    char message_buffer[512], commit[512], addOrigin[512], checkpush[512], origin[512];
+    char *branch = NULL, *url = NULL;
 
-    sprintf(message_buffer, "%s %s", prefix, argv[1]);
+    int ch;
+    while((ch = getopt(argc, argv, "b:u:")) != -1){
+        switch(ch){
+            case 'b':
+                branch = optarg;
+                snprintf(checkpush, sizeof checkpush,
+                        "git checkout -b %s || git checkout %s && " // I have to rewrite this, or else it won't work on powershell/cmd
+                        "git push -u origin %s",
+                        branch, branch, branch);
+                break;
 
-    snprintf(origin, sizeof origin, 
+            case 'u':
+                url = optarg;
+                snprintf(addOrigin, sizeof addOrigin,
+                        "git remote add origin %s && ",
+                        url);
+                break;
+
+            case '?':
+                printf("Unknown flag parsed. Type 'commita' or 'commita --help' for help");
+                return 1;
+        }
+    }
+
+    sprintf(message_buffer, "%s %s", prefix, argv[optind]);
+    snprintf(commit, sizeof commit,
             "git add -A && "
-            "git commit -m \"%s\" && "
-            "git remote add origin %s && "
-            "git checkout -b %s || git checkout %s &&" // I have to rewrite this, or else it won't work on powershell/cmd
-            "git push -u origin %s",
-            message_buffer, argv[2], argv[3], argv[3], argv[3]);
+            "git commit -m \"%s\" && ",
+            message_buffer);
 
-    system("git remote remove origin");
+    if(branch == NULL){
+        snprintf(checkpush, sizeof checkpush,
+                "git checkout -b main || git checkout main && "
+                "git push -u origin main");
+    }
+
+    snprintf(origin, sizeof origin, "%s %s %s", addOrigin, commit, checkpush);
+
     int statusCode = system(origin);
 
     if(statusCode != 0){
-        sprintf(buffer, "\nStatus Code: %d\nCommand: %s", statusCode, origin);
+        sprintf(buffer, "\nStatus Code: %d\nCommand: %s\n\nUrl: %s\nBranch: %s", statusCode, origin, url, branch);
         printf("%s", buffer);
         exit(EXIT_FAILURE);
     }
+
+    printf("%s", origin);
 
     return 0;
 }

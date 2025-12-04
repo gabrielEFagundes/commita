@@ -24,11 +24,11 @@ void show_help()
         "   refactor    :recycle: refactor: <<message>>\n"
         "   remove      :fire: rm: <<message>>\n\n"
         "The syntax for most commands are:\n\n"
-        "git [prefix] <<commit message>> <<branch>> <<repository url>>\n\n"
+        "git [prefix] -u <<repo's url>> -b <<branch>> <<message>>\n\n"
         "   prefix      the type of commit message you want\n"
-        "   message     your commit's message\n"
-        "   branch      your repo's branch, can also be a new one\n"
-        "   url         your repo's url\n\n");
+        "   -b          (optional) your desired branch, uses the default 'main' branch if not parsed\n"
+        "   -u          (optional) your repo's url, only parse on your first commit or if not parsed yet\n"
+        "   message     your commit message\n\n");
 
     printf("%s", buffer);
 }
