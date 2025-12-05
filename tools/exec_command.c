@@ -8,11 +8,11 @@ char buffer[1000];
 
 int exec_command(char *prefix, int argc, char *argv[])
 {
-    // if(argc != 4){
-    //     sprintf(buffer, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> <message> <repo_url> <branch>\n\nType commita for help\n", argc);
-    //     printf("%s", buffer);
-    //     exit(EXIT_FAILURE);
-    // }
+    if(argc != 1){
+        sprintf(buffer, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> [-b] [-u] <message>\n\nType commita for help\n", argc);
+        printf("%s", buffer);
+        exit(EXIT_FAILURE);
+    }
     
     char message_buffer[512], commit[512], addOrigin[512], checkpush[512], origin[512];
     char *branch = NULL, *url = NULL;
