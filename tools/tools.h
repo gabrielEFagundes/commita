@@ -15,7 +15,7 @@ int exec_command(char *prefix, int argcount, char *argvec[]);
 #endif
 
 /// @brief Executes a series of git commands, uses the user message to build the commit message, also uses the repo URL
-/// @param argcount Counts the amount of arguments, usually 3 (git <prefix> <message> <repo_url>)
+/// @param argcount Counts the amount of arguments, usually 1 (git <prefix> [-b] [-u] <message>)
 /// @param argvect Vector with your command and message
 void exec_git_feat(int argcount, char *argvect[]);
 void exec_git_fix(int argcount, char *argvect[]);
@@ -32,3 +32,8 @@ void show_version();
 
 /// @brief Shows when a wrong flag is parsed
 void wrong_opt();
+
+/// @brief Authenticates the user into their account
+/// @param argc Counts the arguments, usually 2 (git login [-l or -g] username usermail)
+/// @param argv Are the parsed arguments
+void login(int argc, char *argv[]);
