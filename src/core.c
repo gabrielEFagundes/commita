@@ -14,7 +14,7 @@ static struct option long_options[] = {
 void show_help()
 {
     sprintf(buffer, 
-        "\nCommita - v1.0.0"
+        "\nCommita - v1.1.0"
         "\nWelcome to Commita!\n\n"
         "All commands starts with 'git'\n\n"
         "   feat        :sparkles: feat: <<message>>\n"
