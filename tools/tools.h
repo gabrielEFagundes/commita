@@ -36,4 +36,4 @@ void wrong_opt();
 /// @brief Authenticates the user into their account
 /// @param argc Counts the arguments, usually 2 (git login [-l or -g] username usermail)
 /// @param argv Are the parsed arguments
-void login(int argc, char *argv[]);
+int login(int argc, char *argv[]);

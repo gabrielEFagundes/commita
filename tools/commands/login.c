@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "../tools.h"
 
-void login(int argc, char *argv[]){
+int login(int argc, char *argv[]){
     char *abundance = NULL;
     char message[512];
     int ch;
@@ -20,23 +20,29 @@ void login(int argc, char *argv[]){
 
             case '?':
                 printf("\nUnknown flag parsed. Type 'commita' or 'commita --help' for help\n");
-                break;
+                return 1;
             
             default:
                 printf("\nWill this be applied locally or globally? Use -l or -g to specify that!\n");
-                break;
+                exit(EXIT_FAILURE);
         }
     }
 
     snprintf(message, sizeof message,
             "git config %s user.name %s && git config %s user.email %s",
-            abundance, argv[optind], argv[optind+1]);
+            abundance, argv[2], abundance, argv[3]);
 
-    printf("%s", message);
+    int status = system(message);
+
+    if(status != 0){
+        printf("\nUsername: %s\nEmail: %s\nAbundance: %s", argv[2], argv[3], abundance);
+        exit(EXIT_FAILURE);
+    }
 }
 
 int main(int argc, char *argv[]){
     login(argc, argv);
+    return 1;
 }
 
 /*
