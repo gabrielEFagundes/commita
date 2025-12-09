@@ -9,7 +9,7 @@ int login(int argc, char *argv[]){
     int ch;
 
     if(argc != 4){
-        sprintf(message, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> [-b] [-u] <message>\n\nType commita for help\n", argc);
+        sprintf(message, "\nToo many/few arguments: %d\nCorrect indentation: git login [-l or -g] <username> <email>\n\nType commita for help\n", argc);
         printf("%s", message);
         exit(EXIT_FAILURE);
     }
