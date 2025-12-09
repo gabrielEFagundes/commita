@@ -63,7 +63,5 @@ int exec_command(char *prefix, int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    printf("%s", origin);
-
     return 0;
 }

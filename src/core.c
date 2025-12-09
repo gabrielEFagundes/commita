@@ -14,7 +14,7 @@ static struct option long_options[] = {
 void show_help()
 {
     sprintf(buffer, 
-        "\nCommita - v1.1.1"
+        "\nCommita - v1.2.0"
         "\nWelcome to Commita!\n\n"
         "All commands starts with 'git'\n\n"
         "   feat        :sparkles: feat: <<message>>\n"
@@ -28,7 +28,12 @@ void show_help()
         "   prefix      the type of commit message you want\n"
         "   -b          (optional) your desired branch, uses the default 'main' branch if not parsed\n"
         "   -u          (optional) your repo's url, only parse on your first commit or if not parsed yet\n"
-        "   message     your commit message\n\n");
+        "   message     your commit message\n\n"
+        "SINCE v1.2.0:\n"
+        "You can also login into your git account way faster:\n\n"
+        "git login [-l || -g] username email\n\n"
+        "   -l          same as --local\n"
+        "   -g          same as --global\n\n");
 
     printf("%s", buffer);
 }
