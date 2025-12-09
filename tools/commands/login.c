@@ -8,6 +8,12 @@ int login(int argc, char *argv[]){
     char message[512];
     int ch;
 
+    if(argc != 4){
+        sprintf(message, "\nToo many/few arguments: %d\nCorrect indentation: git <prefix> [-b] [-u] <message>\n\nType commita for help\n", argc);
+        printf("%s", message);
+        exit(EXIT_FAILURE);
+    }
+
     while((ch = getopt(argc, argv, "lg")) != -1){
         switch(ch){
             case 'l':
@@ -44,7 +50,3 @@ int main(int argc, char *argv[]){
     login(argc, argv);
     return 1;
 }
-
-/*
-    git config (--local or --global) user.name (name) && git config (--local or --global) user.email (email)
-*/
