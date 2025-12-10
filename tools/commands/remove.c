@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../tools.h"
+#include "../headers/tools.h"
 
 void exec_git_remove(int argc, char *argv[]){
     exec_command(":fire: rm: ", argc, argv);
