@@ -24,10 +24,10 @@
 
 /// @brief Blue tones
 #define BLUE "\e[38;5;27m"
-#define LIGHT_BLUE "\e[38;5;33m"
+#define LIGHT_BLUE "\e[38;5;69m"
 
 /// @brief Use this to prevent colors from "leaking"
-#define RESET "\e[0m\n"
+#define RESET "\e[0m"
 
 /*
     More colors: https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124

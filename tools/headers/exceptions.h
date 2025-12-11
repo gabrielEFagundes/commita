@@ -27,10 +27,10 @@ typedef enum {
     // fatal: Authentication failed
     INVALID_REMOTE_CREDENTIALS,
     // fatal: refusing to merge unrelated histories
-    UNRELATED_HISTORIES // I'm cooked solving those
+    UNRELATED_HISTORIES
 } GitExceptions;
 
 /// @brief Used to parse an exception and return a more user-friendly error message.
 ///
 /// @param exc Exception to be parsed, has to be part of GitExceptions enum
-void parse_exception(GitExceptions exc);
+char* parse_exception(GitExceptions exc);
