@@ -30,7 +30,15 @@ typedef enum {
     UNRELATED_HISTORIES
 } GitExceptions;
 
+/// @brief Used to calculate the amount of memory to allocate when building a message
+/// @param str The string to count
+int calculate_malloc(char *str);
+
+#ifndef PARSER_EX
+#define PARSER_EX
+
 /// @brief Used to parse an exception and return a more user-friendly error message.
 ///
 /// @param exc Exception to be parsed, has to be part of GitExceptions enum
 char* parse_exception(GitExceptions exc);
+#endif

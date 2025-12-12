@@ -8,13 +8,29 @@ void exception_handler(char *err){
     // here's where I'll have loads of fun ;P
 }
 
+int calculate_malloc(char *str){
+    int len = 0;
+    while(*str != '\0'){
+        len++;
+        str++;
+    }
+    return len;
+}
+
+// what am I supposed to do here if not repeating code DD;
+// solve those problems, future Gabriel, and I'm sorry
 char* parse_exception(GitExceptions exc){
+    char* msg = malloc(1024);
+    char* smth = NULL;
+
     switch(exc){
-        case NO_REPO: return
-            "%sFatal!\n%s"
-            "The directory you're in is %snot%s a git repository!\n"
-            "Please, use \"%sgit init%s\" to start a new repository.", 
-            RED, RESET, RED, RESET, LIGHT_BLUE, RESET;
+        case NO_REPO: 
+            smth = "%sFatal!\n%s"
+                "The directory you're in is %snot%s a git repository!\n"
+                "Please, use \"%sgit init%s\" to start a new repository.",
+                RED, RESET, RED, RESET, LIGHT_BLUE, RESET;
+
+            return smth;
 
         case MISSING_REMOTE_CHANGES: return
             "%sFatal!\n%s"
