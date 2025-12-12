@@ -7,6 +7,10 @@
 /// @param err Parsed error message, used by the algorithm to find the exact error
 void exception_handler(char *err);
 
+/// @brief Builds a string with dynamically allocated memory, acts similarly to asprintf()
+/// @param msg Your string to format
+char* alloc_memory(char* msg, ...);
+
 typedef enum {
     // fatal: not a git repository
     NO_REPO,

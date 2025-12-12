@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 #include "headers/exceptions.h"
 #include "auxiliers/ansi_colors.h"
 
@@ -17,20 +18,36 @@ int calculate_malloc(char *str){
     return len;
 }
 
-// what am I supposed to do here if not repeating code DD;
-// solve those problems, future Gabriel, and I'm sorry
-char* parse_exception(GitExceptions exc){
-    char* msg = malloc(1024);
-    char* smth = NULL;
+char* alloc_memory(char* msg, ...){
+    char* str;
+    va_list args;
+    va_start(args, msg);
 
+    vsnprintf(str, calculate_malloc(msg), msg, args);
+    return str;
+}
+
+// well, I need to know the amount of characters the string contains, and that's the problem, we don't know the string size ;,D
+char* parse_exception(GitExceptions exc){
     switch(exc){
         case NO_REPO: 
-            smth = "%sFatal!\n%s"
+            // msg = "%sFatal!\n%s"
+            //       "The directory you're in is %snot%s a git repository!\n"
+            //       "Please, use \"%sgit init%s\" to start a new repository.";
+
+            // int msize = snprintf(NULL, 0, msg, RED, RESET, RED, RESET, LIGHT_BLUE, RESET);
+
+            // char* stralloc = malloc((size_t) msize+1);
+
+            // snprintf(stralloc, msize, msg, RED, RESET, RED, RESET, LIGHT_BLUE, RESET);
+            // return stralloc;
+
+            /*
+                "%sFatal!\n%s"
                 "The directory you're in is %snot%s a git repository!\n"
                 "Please, use \"%sgit init%s\" to start a new repository.",
-                RED, RESET, RED, RESET, LIGHT_BLUE, RESET;
-
-            return smth;
+                RED, RESET, RED, RESET, LIGHT_BLUE, RESET
+            */
 
         case MISSING_REMOTE_CHANGES: return
             "%sFatal!\n%s"
