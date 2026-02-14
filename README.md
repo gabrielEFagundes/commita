@@ -25,8 +25,7 @@ git remove      - Remove files and directories
 ```
 
 > [!IMPORTANT]
-> It's worth warning that commita's commands do not work properly in powershell/cmd, because those are not based on bash, which means they don't support some specific commands that bash does.
-> You can use the commands on the CLIs, but I do not recommend doing that, use git bash instead!
+> Commita is being built around `bash`, which means it may not work properly on other CLI's, like CMD.
 
 ## License
 
