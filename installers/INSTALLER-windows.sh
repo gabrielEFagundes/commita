@@ -8,3 +8,5 @@ export PATH="/c/msys64/ucrt64/bin:$PATH"
 
 gcc --version
 sleep 5
+
+# ON STAND BY, please do not modify
