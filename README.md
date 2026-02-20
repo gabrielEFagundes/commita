@@ -1,6 +1,6 @@
 <div align="center">
     <h1>Commita</h1>
-    <sub>Why waste time with commiting and pushing, Commita gets you done in seconds.</sub>
+    <sub>Why waste time with commiting and pushing, Commita gets you done within seconds.</sub>
     <br>
     <br>
     <img src="https://img.shields.io/badge/Build-In_Development-g?logo=devbox&logoColor=white">    
@@ -9,7 +9,7 @@
 
 ## What's Commita?
 
-Commita will be a simple program, which will give you freedom to use easier git commands, that will give you a ready and quick conventional commit message template and even an emoji along with it.
+Commita is a simple program, which gives you freedom to use easier git commands, they will give you a ready and quick conventional commit message template and even an emoji along with it.
 
 ## Commands
 

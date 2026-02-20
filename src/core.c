@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <getopt.h>
-#include "../tools/tools.h"
+#include "../tools/headers/tools.h"
 
 char buffer[1000];
 
@@ -14,7 +14,7 @@ static struct option long_options[] = {
 void show_help()
 {
     sprintf(buffer, 
-        "\nCommita - v1.2.1"
+        "\nCommita - v1.2.2"
         "\nWelcome to Commita!\n\n"
         "All commands starts with 'git'\n\n"
         "   feat        :sparkles: feat: <<message>>\n"

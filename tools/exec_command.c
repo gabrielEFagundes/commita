@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
-#include "tools.h"
+#include <string.h>
+#include "headers/tools.h"
 
 char buffer[1000];
 

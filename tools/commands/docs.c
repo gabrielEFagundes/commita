@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../tools.h"
+#include "../headers/tools.h"
 
 void exec_git_docs(int argc, char *argv[]){
     exec_command(":memo: doc: ", argc, argv);

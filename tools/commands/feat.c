@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../tools.h"
+#include "../headers/tools.h"
 
 void exec_git_feat(int argc, char *argv[]){
     exec_command(":sparkles: feat:", argc, argv);
