@@ -39,14 +39,14 @@ void show_help()
 }
 
 void show_version(){
-    sprintf(buffer, "\nCommita - v1.2.2\n");
+    sprintf(buffer, "\nCommita - v1.2.1\n\n");
     printf("%s", buffer);
 }
 
 void wrong_opt(){
     sprintf(buffer, "\nUnknown flag parsed, the available options are:\n\n"
                     "   -v     Version\n"
-                    "   -h     Help\n");
+                    "   -h     Help\n\n");
     printf("%s", buffer);
 }
 

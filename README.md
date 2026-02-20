@@ -25,8 +25,7 @@ git remove      - Remove files and directories
 ```
 
 > [!IMPORTANT]
-> You can use commita on Windows CLIs, but it's highly not recommended to do that, as some commands need bash to work properly.
-> Just use Git Bash if you're on Windows.
+> Commita is being built around `bash`, which means it may not work properly on other CLI's, like CMD.
 
 ## License
 
