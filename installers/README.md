@@ -14,4 +14,5 @@ Enter commita's folder and run the command on your bash-based CLI:
 
 > [!IMPORTANT]
 > As of version 1.2.1 of commita, there's only a windows installer, but I'll make one for every OS.
+> 
 > The Windows installer is on stand by for now. I'll be focusing on language migration and feature developing, the installer will be developed later on.
