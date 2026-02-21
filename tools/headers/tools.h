@@ -8,13 +8,14 @@
 /// @brief Auxiliar command, executes the commands and pushes to your branch
 /// 
 /// Usually, it stages all your files, commits them with your message and then push it to your repo's branch
+///
 /// @param prefix The prefix (feat, fix, etc)
 /// @param argcount Counts the amount of arguments, usually 3 (git <prefix> <message> <branch> <repo_url>)
 /// @param argvec Vector with your command and message
 int exec_command(char *prefix, int argcount, char *argvec[]);
 #endif
 
-/// @brief Executes a series of git commands, uses the user message to build the commit message, also uses the repo URL
+/// @brief Used by @ref exec_command(), uses the user message to build the commit message, also uses the repo URL
 /// @param argcount Counts the amount of arguments, usually 1 (git <prefix> [-b] [-u] <message>)
 /// @param argvect Vector with your command and message
 void exec_git_feat(int argcount, char *argvect[]);
