@@ -1,11 +1,19 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
+
+	"github.com/jonathonwebb/getopt"
 )
 
-func show_help() string {
+var state = getopt.NewState(os.Args)
+var config = getopt.Config{
+	Opts:     getopt.OptStr(`hv`),
+	LongOpts: getopt.LongOptStr("help,version"),
+}
+
+func show_help() {
 	buffer := fmt.Sprintf(
 		"\nCommita - v1.2.2" +
 			"\nWelcome to Commita!\n\n" +
@@ -27,11 +35,11 @@ func show_help() string {
 			"   -l          same as --local\n" +
 			"   -g          same as --global\n\n")
 
-	return buffer
+	fmt.Print(buffer)
 }
 
-func show_version() string {
-	return "\nCommita - v1.2.2\n\n"
+func show_version() {
+	fmt.Print("\nCommita - v1.2.2\n")
 }
 
 func wrong_opt() {
@@ -41,9 +49,24 @@ func wrong_opt() {
 }
 
 func main() {
-	help := flag.String("h", show_help(), "Shows helpful commands")
-	version := flag.String("v", show_version(), "Shows commita's version")
+	// this prints a lot of wrong messages when using the long flag
+	// it must be the loop iterating over every single character
+	// solve this ;)
+	state.Parse(config)
+	for opt, err := range state.All(config) {
+		if err != nil {
+			wrong_opt()
+			os.Exit(0)
+		}
 
-	flag.Parse()
-	// find a way to print it ;)
+		switch {
+		case opt.Char == 'h' || opt.Name == "help":
+			show_help()
+			return
+
+		case opt.Char == 'v' || opt.Name == "version":
+			show_version()
+			return
+		}
+	}
 }
