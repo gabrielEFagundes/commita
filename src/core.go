@@ -9,8 +9,7 @@ import (
 
 var state = getopt.NewState(os.Args)
 var config = getopt.Config{
-	Opts:     getopt.OptStr(`hv`),
-	LongOpts: getopt.LongOptStr("help,version"),
+	Opts: getopt.OptStr(`hv`),
 }
 
 func show_help() {
@@ -39,7 +38,7 @@ func show_help() {
 }
 
 func show_version() {
-	fmt.Print("\nCommita - v1.2.2\n")
+	fmt.Print("Commita - v1.2.2")
 }
 
 func wrong_opt() {
@@ -49,13 +48,20 @@ func wrong_opt() {
 }
 
 func main() {
-	// this prints a lot of wrong messages when using the long flag
-	// it must be the loop iterating over every single character
-	// solve this ;)
+	// I'll leave it like this and move on with the migration, we'll look forward to this later
 	state.Parse(config)
-	for opt, err := range state.All(config) {
+
+	if len(os.Args) < 2 {
+		show_help()
+		os.Exit(0)
+	}
+
+	for {
+		opt, err := state.GetOpt(config)
+
 		if err != nil {
 			wrong_opt()
+			fmt.Print("Error:", err)
 			os.Exit(0)
 		}
 
