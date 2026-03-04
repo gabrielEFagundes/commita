@@ -1,11 +1,25 @@
 package functions
 
-import (
-	"fmt"
+func CommitFeat(argM string) string {
+	return "✨ feat: " + argM
+}
 
-	functions_auxiliers "github.com/gabrielefagundes/commita/functions/auxiliers"
-)
+func CommitFix(argM string) string {
+	return "🐛 fix: " + argM
+}
 
-func CommitFeat(argM string) {
-	fmt.Print(functions_auxiliers.Append("✨ feat: ", argM))
+func CommitChore(argM string) string {
+	return "🎨 chore: " + argM
+}
+
+func CommitRefactor(argM string) string {
+	return "♻️ refactor: " + argM
+}
+
+func CommitDocs(argM string) string {
+	return "📄 doc: " + argM
+}
+
+func CommitRemove(argM string) string {
+	return "🔥 remove: " + argM
 }
