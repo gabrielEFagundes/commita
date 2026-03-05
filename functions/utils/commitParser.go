@@ -2,18 +2,17 @@ package utils
 
 import "fmt"
 
-var emojis = map[string] string{
-	"feat": 	"✨",
-	"fix": 		"🐛",
-	"docs": 	"📄",
-	"chore": 	"🎨",
+var emojis = map[string]string{
+	"feat":     "✨",
+	"fix":      "🐛",
+	"docs":     "📄",
+	"chore":    "🎨",
 	"refactor": "♻️",
-	"remove": 	"🔥",
+	"remove":   "🔥",
 }
 
 func Parse(prefix string, msg string, wEmoji bool) string {
-
-	if !wEmoji{
+	if !wEmoji {
 		return fmt.Sprintf("%s: %s", prefix, msg)
 	}
 

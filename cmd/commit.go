@@ -47,9 +47,9 @@ func runCommit(cmd *cobra.Command, args []string) {
 
 	if len(args) == 0 {
 		err := fmt.Sprint("Invalid\n" +
-		"Please, provide a valid input\n" +
-		"\t--type [commit type] [msg]\n" +
-		"\t--[semantic] [msg]")
+			"Please, provide a valid input\n" +
+			"\t--type [commit type] [msg]\n" +
+			"\t--[semantic] [msg]")
 
 		fmt.Print(err)
 		return
@@ -88,5 +88,6 @@ func runCommit(cmd *cobra.Command, args []string) {
 	opts.Emoji = true // will be default
 
 	opts.Msg = utils.Parse(opts.CommitType, opts.Msg, opts.Emoji)
+
 	fmt.Print(opts.Msg)
 }
