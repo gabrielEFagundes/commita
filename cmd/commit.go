@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gabrielefagundes/commita/functions/utils"
 	"github.com/gabrielefagundes/commita/structs"
+	"github.com/gabrielefagundes/commita/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -43,6 +43,7 @@ func init() {
 
 func runCommit(cmd *cobra.Command, args []string) {
 	opts := structs.CommitOptions{}
+	conf, _ := utils.LoadConfig()
 	types := cmd.Flags().Changed("type")
 
 	if len(args) == 0 {
@@ -85,7 +86,7 @@ func runCommit(cmd *cobra.Command, args []string) {
 		opts.CommitType = commitType
 	}
 
-	opts.Emoji = true // will be default
+	opts.Emoji = conf.UseEmoji
 
 	opts.Msg = utils.Parse(opts.CommitType, opts.Msg, opts.Emoji)
 

@@ -7,7 +7,7 @@ import (
 // i'll change this because it'll be outdated after the migration
 // but we can keep this now
 func ShowHelp() string {
-	buffer := fmt.Sprintf(
+	return fmt.Sprintf(
 		"\nCommita - v1.2.2" +
 			"\nWelcome to Commita!\n\n" +
 			"All commands start with 'git'\n\n" +
@@ -27,9 +27,26 @@ func ShowHelp() string {
 			"git login [-l || -g] username email\n\n" +
 			"   -l          same as --local\n" +
 			"   -g          same as --global\n\n")
-
-	return buffer
 }
+
+func ConfigHelp() string {
+	return fmt.Sprintf(
+		"\nGenerates a config file if it doesn't exists\n\n" +
+			"Comes with default values for:\n" +
+			"\tdefaultBranch	 	'main'\n" +
+			"\temojis	 			true\n" +
+			"\tuseAI	 			false (TO BE IMPLEMENTED)")
+}
+
+/*
+`Generates a config file if it doesn't exists
+
+Comes with default values for:
+	branch - 'main'
+	emojis - true
+	aiUsage - false (TO BE IMPLEMENTED)
+	`
+*/
 
 func TestMsg() {
 	fmt.Print("This is a test message")

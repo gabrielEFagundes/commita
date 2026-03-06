@@ -10,6 +10,6 @@ the default branch will be 'main', and the remote repo url will have to be parse
 
 dev will use something like 'commita config --url [url-to-repo]'
 */
-func CommitAndPush(commitMsg string, branch string, url string) {
-
+func CommitAndPush(commitMsg string, branch string) {
+	
 }
