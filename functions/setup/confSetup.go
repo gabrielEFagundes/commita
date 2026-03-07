@@ -1,14 +1,20 @@
-package utils
+package setup
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 
 	"github.com/gabrielefagundes/commita/structs"
 )
 
+var (
+	dir, _           = os.UserHomeDir()
+	commitaConfigDir = fmt.Sprintf("%s\\commita\\config.json", dir)
+)
+
 func CreateConfig() error {
-	if _, err := os.Stat("./config.json"); err == nil {
+	if _, err := os.Stat(commitaConfigDir); err == nil {
 		return nil
 	}
 
@@ -16,13 +22,13 @@ func CreateConfig() error {
 
 	data, _ := json.MarshalIndent(conf, "", " ")
 
-	return os.WriteFile("./config.json", []byte(data), 0666)
+	return os.WriteFile(commitaConfigDir, []byte(data), 0666)
 }
 
 func LoadConfig() (structs.Config, error) {
 	var conf structs.Config
 
-	data, err := os.ReadFile("./config.json")
+	data, err := os.ReadFile(commitaConfigDir)
 
 	if err != nil {
 		return conf, err
@@ -40,5 +46,5 @@ func SaveConfig(conf structs.Config) error {
 		return err
 	}
 
-	return os.WriteFile("./config.json", data, 0666)
+	return os.WriteFile(commitaConfigDir, data, 0666)
 }

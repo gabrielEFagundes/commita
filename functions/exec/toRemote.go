@@ -1,15 +1,49 @@
 package exec
 
-// just so I don't forget
+import (
+	"fmt"
+	"os/exec"
 
-/*
-the dev will configure which url AND branch they want to push their changes
-through the config file commita will generate
+	"github.com/gabrielefagundes/commita/functions/setup"
+	"github.com/gabrielefagundes/commita/structs"
+)
 
-the default branch will be 'main', and the remote repo url will have to be parsed on the config file
+func CommitAndPush(commitMsg string) error {
+	conf, errConf := setup.LoadConfig()
+	if errConf != nil {
+		return errConf
+	}
 
-dev will use something like 'commita config --url [url-to-repo]'
-*/
-func CommitAndPush(commitMsg string, branch string) {
-	
+	cmds := structs.MountTask(commitMsg, conf.DefaultBranch)
+
+	for _, arg := range cmds {
+		fmt.Printf("-> %s", arg.Label)
+
+		var err error
+		switch arg.Cmd[0] {
+		case "remote":
+			err = setup.SetupRemote(conf.Url)
+
+		case "commit":
+			status := setup.SetupCommit()
+			if status == nil {
+				// need to find a way to go through this step
+			}
+			continue
+
+		case "checkout":
+			err = setup.SetupBranch(conf.DefaultBranch)
+
+		default:
+			err = exec.Command("git", arg.Cmd...).Run()
+		}
+
+		if err != nil {
+			return fmt.Errorf("\nfailed trying %s: %w", arg.Cmd[0], err)
+		}
+
+		fmt.Println("\t\t\t[ OK ]")
+	}
+
+	return nil
 }

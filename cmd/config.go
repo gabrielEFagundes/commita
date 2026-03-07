@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gabrielefagundes/commita/functions"
-	"github.com/gabrielefagundes/commita/utils"
+	"github.com/gabrielefagundes/commita/functions/setup"
 	"github.com/spf13/cobra"
 )
 
@@ -30,9 +30,9 @@ func init() {
 }
 
 func changeConfigs(cmd *cobra.Command, args []string) {
-	utils.CreateConfig()
+	setup.CreateConfig()
 
-	conf, _ := utils.LoadConfig()
+	conf, _ := setup.LoadConfig()
 
 	emoji, _ := cmd.Flags().GetBool("use-emoji")
 
@@ -55,5 +55,5 @@ func changeConfigs(cmd *cobra.Command, args []string) {
 		fmt.Printf("Emojis set to %t", conf.UseEmoji)
 	}
 
-	utils.SaveConfig(conf)
+	setup.SaveConfig(conf)
 }
