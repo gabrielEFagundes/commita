@@ -42,6 +42,7 @@ func changeConfigs(cmd *cobra.Command, args []string) {
 	}
 
 	if url != "" && branch == "main" {
+		conf.DefaultBranch = "main"
 		fmt.Println("Remote repo updated and no branch specified\nBranch set to 'main'")
 	}
 

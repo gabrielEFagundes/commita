@@ -6,44 +6,47 @@ import (
 
 	"github.com/gabrielefagundes/commita/functions/setup"
 	"github.com/gabrielefagundes/commita/structs"
+	"github.com/gabrielefagundes/commita/utils"
 )
 
-func CommitAndPush(commitMsg string) error {
+func CommitAndPush(commitMsg string) (string, error) {
 	conf, errConf := setup.LoadConfig()
 	if errConf != nil {
-		return errConf
+		return "", fmt.Errorf("error in configuration: %w", errConf)
 	}
 
-	cmds := structs.MountTask(commitMsg, conf.DefaultBranch)
+	cmds := structs.MountTask(commitMsg, conf.DefaultBranch, conf.Url)
 
 	for _, arg := range cmds {
-		fmt.Printf("-> %s", arg.Label)
+		label := fmt.Sprintf("\n-> %s", arg.Label)
+		fmt.Print(utils.LeftAlign(label, 50))
 
 		var err error
 		switch arg.Cmd[0] {
 		case "remote":
-			err = setup.SetupRemote(conf.Url)
+			err = setup.SetupRemote(conf.Url, arg)
 
 		case "commit":
 			status := setup.SetupCommit()
-			if status == nil {
-				// need to find a way to go through this step
+			if status != nil {
+				fmt.Printf("%s", status)
+				continue
 			}
-			continue
+			err = exec.Command("git", arg.Cmd...).Run()
 
 		case "checkout":
-			err = setup.SetupBranch(conf.DefaultBranch)
+			err = setup.SetupBranch(conf.DefaultBranch, arg)
 
 		default:
 			err = exec.Command("git", arg.Cmd...).Run()
 		}
 
 		if err != nil {
-			return fmt.Errorf("\nfailed trying %s: %w", arg.Cmd[0], err)
+			return "", fmt.Errorf("\nfailed trying %s: %w", arg.Cmd[0], err)
 		}
 
-		fmt.Println("\t\t\t[ OK ]")
+		fmt.Print("[ OK ]")
 	}
 
-	return nil
+	return "\nDone!", nil
 }

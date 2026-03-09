@@ -92,5 +92,10 @@ func runCommit(cmd *cobra.Command, args []string) {
 
 	opts.Msg = utils.Parse(opts.CommitType, opts.Msg, opts.Emoji)
 
-	fmt.Print(exec.CommitAndPush(opts.Msg))
+	if res, err := exec.CommitAndPush(opts.Msg); err != nil {
+		fmt.Print(err)
+	} else {
+		fmt.Print(res)
+	}
+
 }

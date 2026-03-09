@@ -3,19 +3,21 @@ package setup
 import (
 	"fmt"
 	"os/exec"
+
+	"github.com/gabrielefagundes/commita/structs"
 )
 
-func SetupBranch(b string) error {
-	err := exec.Command("git", "checkout", b).Run()
+func SetupBranch(b string, arg structs.Task) error {
+	err := exec.Command("git", arg.Cmd...).Run()
 	if err == nil {
 		return nil
 	}
 
-	return exec.Command("git", "checkout", "-b", b).Run()
+	return exec.Command("git", "checkout", b).Run()
 }
 
-func SetupRemote(u string) error {
-	err := exec.Command("git", "remote", "add", "origin", u).Run()
+func SetupRemote(u string, arg structs.Task) error {
+	err := exec.Command("git", arg.Cmd...).Run()
 	if err == nil {
 		return nil
 	}
@@ -25,9 +27,9 @@ func SetupRemote(u string) error {
 
 func SetupCommit() error {
 	status, _ := exec.Command("git", "status", "--porcelain").Output()
-	if len(status) == 0 {
+	if len(status) != 0 {
 		return nil
 	}
 
-	return fmt.Errorf("nothing to commit")
+	return fmt.Errorf("[ UP TO DATE ]")
 }
