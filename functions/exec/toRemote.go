@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/gabrielefagundes/commita/exceptions"
 	"github.com/gabrielefagundes/commita/functions/setup"
 	"github.com/gabrielefagundes/commita/structs"
 	"github.com/gabrielefagundes/commita/utils"
@@ -22,6 +23,7 @@ func CommitAndPush(commitMsg string) (string, error) {
 		fmt.Print(utils.LeftAlign(label, 50))
 
 		var err error
+		var output []byte
 		switch arg.Cmd[0] {
 		case "remote":
 			err = setup.SetupRemote(conf.Url, arg)
@@ -38,11 +40,12 @@ func CommitAndPush(commitMsg string) (string, error) {
 			err = setup.SetupBranch(conf.DefaultBranch, arg)
 
 		default:
-			err = exec.Command("git", arg.Cmd...).Run()
+			output, err = exec.Command("git", arg.Cmd...).CombinedOutput()
 		}
 
 		if err != nil {
-			return "", fmt.Errorf("\nfailed trying %s: %w", arg.Cmd[0], err)
+			e := exceptions.DiagnoseErr(string(output), conf)
+			return "", fmt.Errorf("\nfailed trying %s: %s", arg.Cmd[0], e.Msg)
 		}
 
 		fmt.Print("[ OK ]")
