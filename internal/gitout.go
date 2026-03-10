@@ -1,4 +1,4 @@
-package exceptions
+package internal
 
 type GitErr int
 

@@ -45,7 +45,7 @@ func CommitAndPush(commitMsg string) (string, error) {
 
 		if err != nil {
 			e := exceptions.DiagnoseErr(string(output), conf)
-			return "", fmt.Errorf("\nfailed trying %s: %s", arg.Cmd[0], e.Msg)
+			return "", e
 		}
 
 		fmt.Print("[ OK ]")
