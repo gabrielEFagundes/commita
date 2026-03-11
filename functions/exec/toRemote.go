@@ -6,6 +6,7 @@ import (
 
 	"github.com/gabrielefagundes/commita/exceptions"
 	"github.com/gabrielefagundes/commita/functions/setup"
+	"github.com/gabrielefagundes/commita/internal"
 	"github.com/gabrielefagundes/commita/structs"
 	"github.com/gabrielefagundes/commita/utils"
 )
@@ -24,6 +25,8 @@ func CommitAndPush(commitMsg string) (string, error) {
 
 		var err error
 		var output []byte
+		var gitErr *internal.CommitaErr
+
 		switch arg.Cmd[0] {
 		case "remote":
 			err = setup.SetupRemote(conf.Url, arg)
@@ -44,11 +47,17 @@ func CommitAndPush(commitMsg string) (string, error) {
 		}
 
 		if err != nil {
-			e := exceptions.DiagnoseErr(string(output), conf)
-			return "", e
-		}
+			gitErr = exceptions.DiagnoseErr(string(output), conf)
+			fmt.Print(gitErr.Msg)
 
-		fmt.Print("[ OK ]")
+			solve := exceptions.AttemptSolve(gitErr.Type, conf)
+			if solve != nil {
+				return "", solve
+			}
+
+		} else {
+			fmt.Print("[ OK ]")
+		}
 	}
 
 	return "\nDone!", nil

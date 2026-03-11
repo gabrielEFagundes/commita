@@ -10,9 +10,9 @@ import (
 func Confirm(m string) bool {
 	bufio := bufio.NewReader(os.Stdin)
 
-	fmt.Print(m)
+	fmt.Printf("%s (y/n) ", m)
 	confirm, _ := bufio.ReadString('\n')
 
-	confirm = strings.ToLower(confirm)
+	confirm = strings.TrimSpace(strings.ToLower(confirm))
 	return confirm == "y" || confirm == "yes"
 }

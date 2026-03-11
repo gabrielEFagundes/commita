@@ -3,7 +3,8 @@ package internal
 type GitErr int
 
 const (
-	MissingRemoteChanges GitErr = iota
+	NAE GitErr = iota
+	MissingRemoteChanges
 	CommitAfterMerge
 	MissingPerms
 	InterruptedOperation

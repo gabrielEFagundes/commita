@@ -40,52 +40,45 @@ func DiagnoseErr(out string, conf structs.Config) *internal.CommitaErr {
 
 func AttemptSolve(e internal.GitErr, conf structs.Config) error {
 	// only those I think commita can solve
-	possibilities := []internal.GitErr{
-		internal.MissingRemoteChanges,
-		internal.InterruptedOperation,
-		internal.InvalidRemoteCredentials,
-		internal.NotARepo,
-	}
 
-	for _, arg := range possibilities {
-		switch arg {
-		case internal.MissingRemoteChanges:
-			if utils.Confirm("\nWould you like me to pull your remote data? (y/n)") {
-				return exec.Command("git", "pull", conf.Url).Run()
-			}
+	switch e {
+	case internal.NAE:
+		return nil
 
-			return fmt.Errorf("\n%s", aurora.BrightRed("Pull cancelled."))
-
-		case internal.InterruptedOperation:
-			if utils.Confirm("\nWould you like me to remove '.git/index.lock'? (y/n)") {
-				return os.Remove("./.git/index.lock")
-			}
-
-			return fmt.Errorf("\n%s", aurora.BrightRed("Remove cancelled."))
-
-		case internal.InvalidRemoteCredentials:
-			if utils.Confirm("\nWould you like to login through commita?") {
-				// I need to do this logic yet
-			}
-
-			return fmt.Errorf("\n%s", aurora.BrightRed("Login cancelled."))
-
-		case internal.NotARepo:
-			if utils.Confirm("\nWould you like to see and change your url configuration? (y/n)") {
-				fmt.Printf("Remote repository URL: %s", conf.Url)
-
-				if utils.Confirm("\nWould you like to change that? (y/n)") {
-					fmt.Scanf("New Url: %s", conf.Url)
-					return setup.SaveConfig(conf)
-				}
-			}
-
-			return fmt.Errorf("\n%s", aurora.BrightRed("Configurations not altered."))
-
-		default:
-			continue
+	case internal.MissingRemoteChanges:
+		if utils.Confirm("\nWould you like me to pull your remote data?") {
+			return exec.Command("git", "pull", conf.Url).Run() // this can cause merging error (yes, it goes straight to 'main|MERGING') TODO
 		}
-	}
 
-	return fmt.Errorf("\ncannot solve error %d", e)
+		return fmt.Errorf("\n%s", aurora.BrightRed("Pull cancelled."))
+
+	case internal.InterruptedOperation:
+		if utils.Confirm("\nWould you like me to remove '.git/index.lock'?") {
+			return os.Remove("./.git/index.lock")
+		}
+
+		return fmt.Errorf("\n%s", aurora.BrightRed("Remove cancelled."))
+
+	case internal.InvalidRemoteCredentials:
+		if utils.Confirm("\nWould you like to login through commita?") {
+			// I need to do this logic yet
+		}
+
+		return fmt.Errorf("\n%s", aurora.BrightRed("Login cancelled."))
+
+	case internal.NotARepo:
+		if utils.Confirm("\nWould you like to see and change your url configuration?") {
+			fmt.Printf("Remote repository URL: %s", conf.Url)
+
+			if utils.Confirm("\nWould you like to change that?") {
+				fmt.Scanf("New Url: %s", conf.Url)
+				return setup.SaveConfig(conf)
+			}
+		}
+
+		return fmt.Errorf("\n%s", aurora.BrightRed("Configurations not altered."))
+
+	default:
+		return fmt.Errorf("\ncannot solve error %d", e)
+	}
 }
