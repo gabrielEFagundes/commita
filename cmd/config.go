@@ -17,14 +17,15 @@ var (
 var configCmd = &cobra.Command{
 	Use:   "config",
 	Short: "Generates (if not exists) a config file",
-	Long:  functions.ConfigHelp(),
+	Long:  functions.ConfigHelp,
 	Run:   changeConfigs,
 }
 
 func init() {
-	configCmd.Flags().StringVarP(&url, "url", "u", "", "Adds the repository URL to your config file")
-	configCmd.Flags().StringVarP(&branch, "branch", "b", "main", "Changes the default branch for commits without specified branch")
-	configCmd.Flags().Bool("use-emoji", false, "Teels if commita should use emojis for predefined commit semantics") // maybe set this to true
+	// TODO: change this to be a different subcommand, like 'commita config set'
+	configCmd.PersistentFlags().StringVarP(&url, "url", "u", "", "Adds the repository URL to your config file")
+	configCmd.PersistentFlags().StringVarP(&branch, "branch", "b", "main", "Changes the default branch for commits without specified branch")
+	configCmd.PersistentFlags().Bool("use-emoji", false, "Teels if commita should use emojis for predefined commit semantics") // maybe set this to true
 	// I won't implement AI flag yet
 	rootCmd.AddCommand(configCmd)
 }

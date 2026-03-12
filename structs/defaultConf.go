@@ -5,6 +5,13 @@ type Config struct {
 	UseEmoji      bool   `json:"useEmoji"`
 	UseAi         bool   `json:"useAi"`
 	Url           string `json:"url"`
+	Login         Login  `json:"login"`
+}
+
+type Login struct {
+	User      string `json:"user"`
+	Email     string `json:"email"`
+	Abundance string `json:"abundance"`
 }
 
 func DefaultConfigs() Config {
@@ -13,5 +20,6 @@ func DefaultConfigs() Config {
 		UseEmoji:      true,
 		UseAi:         false,
 		Url:           "",
+		Login:         Login{User: "User", Email: "", Abundance: "--local"},
 	}
 }

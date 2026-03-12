@@ -11,7 +11,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "commita",
 	Short: "A Git Framework",
-	Long:  functions.ShowHelp(),
+	Long:  functions.ShowHelp,
 }
 
 func init() {
