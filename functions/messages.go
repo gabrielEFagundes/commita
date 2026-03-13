@@ -38,6 +38,11 @@ var LoginHelp = fmt.Sprintf(
 	"\nLogs you into your Git account\n" +
 		"Commita will only ask for your username and email.")
 
+var SetHelp = fmt.Sprintf(
+	"\nSets commita's configurations\n" +
+		"Simply use set and pass the config through the flag.",
+)
+
 func TestMsg() {
 	fmt.Print("This is a test message")
 }

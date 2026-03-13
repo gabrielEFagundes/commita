@@ -47,10 +47,10 @@ func CommitAndPush(commitMsg string) (string, error) {
 		}
 
 		if err != nil {
-			gitErr = exceptions.DiagnoseErr(string(output), conf)
+			gitErr = exceptions.DiagnoseErr(string(output), *conf)
 			fmt.Print(gitErr.Msg)
 
-			solve := exceptions.AttemptSolve(gitErr.Type, conf)
+			solve := exceptions.AttemptSolve(gitErr.Type, *conf)
 			if solve != nil {
 				return "", solve
 			}

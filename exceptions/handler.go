@@ -39,7 +39,7 @@ func DiagnoseErr(out string, conf structs.Config) *internal.CommitaErr {
 }
 
 func AttemptSolve(e internal.GitErr, conf structs.Config) error {
-	// only those I think commita can solve
+	//* only those I think commita can solve
 
 	switch e {
 	case internal.NAE:
@@ -47,7 +47,7 @@ func AttemptSolve(e internal.GitErr, conf structs.Config) error {
 
 	case internal.MissingRemoteChanges:
 		if utils.Confirm("\nWould you like me to pull your remote data?") {
-			return exec.Command("git", "pull", conf.Url).Run() // this can cause merging error (yes, it goes straight to 'main|MERGING') TODO
+			return exec.Command("git", "pull", conf.Url).Run() //! this can cause merging error (yes, it goes straight to 'main|MERGING') TODO
 		}
 
 		return fmt.Errorf("\n%s", aurora.BrightRed("Pull cancelled."))

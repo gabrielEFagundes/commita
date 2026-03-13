@@ -14,7 +14,7 @@ var (
 	global bool
 )
 
-// this still has no effect over commita's process to commit, but I'll it implement later.
+// ! this still has no effect over commita's process to commit, but I'll it implement later.
 var configLoginCmd = &cobra.Command{
 	Use:   "login",
 	Short: "Login into your Git account",
@@ -31,6 +31,10 @@ func init() {
 }
 
 func login(cmd *cobra.Command, args []string) error {
+	if err := setup.CreateConfig(); err != nil {
+		return fmt.Errorf("\nerror creating config files: %v", err)
+	}
+
 	conf, _ := setup.LoadConfig()
 
 	if local && global {
@@ -51,5 +55,5 @@ func login(cmd *cobra.Command, args []string) error {
 		conf.Login.Abundance = "--global"
 	}
 
-	return setup.SaveConfig(conf)
+	return setup.SaveConfig(*conf)
 }
