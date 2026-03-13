@@ -1,4 +1,6 @@
 .vscode/
+# Commita's config shouldn't be committed
+.commita/
 tests/
 *.exe
 config.json

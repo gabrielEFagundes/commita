@@ -17,7 +17,7 @@ func CommitAndPush(commitMsg string) (string, error) {
 		return "", fmt.Errorf("error in configuration: %w", errConf)
 	}
 
-	cmds := structs.MountTask(commitMsg, conf.DefaultBranch, conf.Url)
+	cmds := structs.MountTask(commitMsg, *conf)
 
 	for _, arg := range cmds {
 		label := fmt.Sprintf("\n-> %s", arg.Label)

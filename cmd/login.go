@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os/exec"
 
 	"github.com/gabrielefagundes/commita/functions"
 	"github.com/gabrielefagundes/commita/functions/setup"
@@ -38,22 +39,22 @@ func login(cmd *cobra.Command, args []string) error {
 	conf, _ := setup.LoadConfig()
 
 	if local && global {
-		return fmt.Errorf("\nplease, choose between --local or --global")
+		return fmt.Errorf("\nplease choose between '--local' or '--global'")
 	}
 
 	email, user := utils.ValidateEmail(args[0], args[1])
 
-	if local {
-		conf.Login.Email = email
-		conf.Login.User = user
-		conf.Login.Abundance = "--local"
+	scope := "--local"
+	if global {
+		scope = "--global"
 	}
 
-	if global {
-		conf.Login.Email = email
-		conf.Login.User = user
-		conf.Login.Abundance = "--global"
-	}
+	exec.Command("git", "config", scope, "user.name", user).Run()
+	exec.Command("git", "config", scope, "user.email", email).Run()
+
+	conf.Login.Abundance = scope
+	conf.Login.Email = email
+	conf.Login.User = user
 
 	return setup.SaveConfig(*conf)
 }
