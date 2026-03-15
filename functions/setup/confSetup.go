@@ -16,6 +16,7 @@ var (
 	// //commitaGlobalConfigDir = fmt.Sprintf("%s\\commita\\config.json", dir)
 	// TODO: implement global configs aswell, merge them with the local configs.
 	commitaLocalConfigDir, dirErr = getLocalDir()
+	base                          = filepath.Dir(filepath.Dir(commitaLocalConfigDir))
 )
 
 func CreateConfig() error {
@@ -30,6 +31,14 @@ func CreateConfig() error {
 	if err := os.MkdirAll(filepath.Dir(commitaLocalConfigDir), os.ModePerm); err != nil {
 		return err
 	}
+
+	f, err := os.OpenFile(filepath.Join(base, ".gitignore"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	f.WriteString("\n.commita")
 
 	conf := structs.DefaultConfigs()
 	data, _ := json.MarshalIndent(conf, "", "\t")
