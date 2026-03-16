@@ -1,3 +1,20 @@
+## v2.0.0-beta - 2026.03.16
+
+### Features
+
+- Completely rewrited the project, migrating everything from C to Go
+- Overhauled the way commita wraps git and decided to change it:
+  - Before, Commita used `git-aliases`, which allowed commands like `git feat`, this approach wasn't bad, but I felt a lack of originality, so I changed that
+  - Now, Commita uses it's own syntax, `commita-aliases`, which are essentially the same thing, but with my own touch on it. No, I don't think people can make their own aliases yet, but I might implement that one day.
+- Added configuration folder for internal projects, `.commita`. With it, there's no need to parse the branch and url everytime we need to commit
+- Added Github pages for the project's documentation. Does not include the page itself, only the config.
+  - The docs pages are located on `/docs` (will be added and worked on later).
+
+### Fixes
+
+- Updated README to match Commita's new rework
+- Updated LICENSE from GNU-3.0 to MIT License
+
 ## v1.3.0 - 2026.03.09
 
 ### Features
