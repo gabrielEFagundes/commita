@@ -1,0 +1,10 @@
+site_name: Commita's Docs
+theme:
+  name: material
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+nav:
+  - Home: index.md
+  - Contributing: CONTRIBUTING.md
