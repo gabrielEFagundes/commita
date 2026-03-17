@@ -38,7 +38,7 @@ func CreateConfig() error {
 	}
 	defer f.Close()
 
-	f.WriteString("\n.commita")
+	f.WriteString("\n.commita/")
 
 	conf := structs.DefaultConfigs()
 	data, _ := json.MarshalIndent(conf, "", "\t")
