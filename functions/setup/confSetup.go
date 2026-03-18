@@ -32,6 +32,8 @@ func CreateConfig() error {
 		return err
 	}
 
+	exec.Command("git", "init").Run() // just in case it isn't initialized by the time the user creates his repository
+
 	f, err := os.OpenFile(filepath.Join(base, ".gitignore"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		return err
