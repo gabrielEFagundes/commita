@@ -4,8 +4,6 @@ import (
 	"fmt"
 )
 
-// i'll change this because it'll be outdated after the migration
-// but we can keep this now
 var ShowHelp = fmt.Sprintf(
 	"\nCommita - v2.0.0-beta" +
 		"\nWelcome to Commita, now powered by GOlang!" +
