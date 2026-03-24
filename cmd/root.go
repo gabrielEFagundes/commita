@@ -15,7 +15,7 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.Version = "v1.2.2"
+	rootCmd.Version = "v2.0.0-beta"
 	rootCmd.SetVersionTemplate("Commita - {{.Version}}")
 }
 
